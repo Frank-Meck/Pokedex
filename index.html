@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./standard.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./header.css">
+  <link rel="stylesheet" href="./pokedex.css">
+  <link rel="stylesheet" href="./singlepokecard.css">
+  <script src="./template.js"></script>
+  <script src="./render.js"></script>
+  <script src="./abfrage.js" defer></script>
+  <script src="./script.js" defer></script>
+
+  <link rel="shortcut icon" href="./assets/icon/Pokeball.png" type="image/x-icon">
+  <title>Pokedex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body onload="init()">
+  <header>
+    <div class="header_total">
+      <div class="header_left">
+        <img class="header_pokeball" src="./assets/icon/Pokeball.png" alt="Pokeball Icon" />
+        <h1 class="header_topic">Welcome to Pokedex</h1>
+      </div>
+      <div class="header_change">
+        <div class="header_middle">
+          <label for="idsearchString" class="sr-only"></label>
+          <p class="header_p">suchen:</p>
+          <input onkeyup="searchPokemon()" id="idsearchString" class="header_input" type="text"
+            placeholder="min 3 Chars" value="" />
+        </div>
+        <div class="header_right">
+          <label for="gen_select" class="gen_label">Generation wählen:</label>
+          <select id="gen_select" aria-label="Generation wählen" onchange="ladeGeneration(this.value)">
+            <option value="1">Generation 1</option>
+            <option value="2">Generation 2</option>
+            <option value="3">Generation 3</option>
+            <option value="4">Generation 4</option>
+            <option value="5">Generation 5</option>
+            <option value="6">Generation 6</option>
+            <option value="7">Generation 7</option>
+            <option value="8">Generation 8</option>
+          </select>
+        </div>
+      </div>
+      <div id="loading_bar_container" style="display:none">
+        <div class="spinner-bar">
+          <div></div>
+        </div>
+        <p style="text-align: center;">Weitere Pokémon werden geladen...</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div id="fehlerAnzeige" style="display:none; color: red; padding: 10px;"></div>
+    <div id="spinner" style="display: none; text-align: center; margin: 20px;">
+      <div class="loader"></div>
+      <div>
+        <div id="fehlerAnzeige" style="display:none; color: red; font-weight: bold;"></div>
+      </div>
+    </div>
+    </div>
+    <section class="pdex_total" id="id_pdex_total">
+    </section>
+    <section class="single_card">
+      <div id="idclassOverlay" class="dimension_overlay overlay" style="display:none">
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>

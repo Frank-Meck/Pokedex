@@ -1,0 +1,69 @@
+/* ------------------------------ Global Styles ------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    --background-body: rgb(8, 8, 8);
+    --background-header: rgb(204, 155, 81);
+
+    --border-inlay-dark: rgb(33 27 27);
+    --border-inlay-dark2: #3d3232;
+    --border-inlay-light: gray;
+    --border-inlay-light2: rgb(87, 85, 85);
+
+    --button-background: rgb(104, 104, 143);
+    --button-background-hover: lightblue;
+
+    --card-aktiv: rgb(115 61 26);
+    --card-aktiv-hover: rgb(173, 92, 37);
+    --card-dark: rgb(15, 15, 15);
+    --card-dragon: rgb(242, 245, 81);
+    --card-electric: rgb(197, 75, 177);
+    --card-fire: rgb(184, 81, 12);
+    --card-fairy: rgb(75, 197, 146);
+    --card-fighting: rgb(204, 172, 143);
+    --card-ghost: rgb(176, 179, 18);
+    --card-grass: #20bf20;
+    --card-ground: rgb(197, 124, 75);
+    --card-ice: white;
+    --card-normal: rgb(203, 224, 208);
+    --card-poison: rgb(229 11 122);
+    --card-psychic: rgb(197 82 171);
+    --card-rock: rgb(75, 65, 65);
+    --card-steel: rgb(83, 77, 72);
+    --card-water: rgb(75, 173, 197);
+    --card-flying: rgb(77, 75, 197);
+    --card-bug: rgb(87, 104, 14);
+
+    --pdex-background: #a29f9f;
+    --pdex-bordercolor-1: rgb(204, 155, 81);
+    --pdex-trasitioncolor: rgb(121 81 23);
+
+    --singlePdex-background: rgb(12, 12, 11);
+    --singlePdex-background-menuecategory: rgb(125, 130, 133);
+}
+
+body {
+    background-color: var(--background-body);
+    color: white;
+    font-family: "Castoro", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    height: auto;
+}
+
+/* ------------------------------ Utility Classes ------------------------------ */
+.d_none {
+    visibility: hidden;
+}
+
+/* ------------------------------ Progress Bar Styles ------------------------------ */
+.progess_bar {
+    border: solid 1px black;
+    border-color: black;
+    border-radius: 5px;
+    height: 7px;
+    width: 280px;
+}

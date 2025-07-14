@@ -1,0 +1,305 @@
+  .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* halbtransparent schwarz */
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+   
+   
+   
+   
+   .dimension_overlay {
+       position: fixed;
+       top: 65px;
+       z-index: 20;
+       height: 100vh;
+       width: 100%;
+       background-color: none;
+       backdrop-filter: blur(3px);
+       display: flex;
+       justify-Content: center;
+       align-items: center;
+   }
+
+   .inner_overlay {
+       display: flex;
+       flex-direction: column;
+       justify-Content: flex-start;
+       align-items: center;
+       border-Radius: 20px;
+       background-color: var(--singlePdex-background);
+       height: 660px;
+       width: 310px;
+       border: solid 20px black;
+       border-left-color: var(--border-inlay-dark);
+       border-top-color: var(--border-inlay-dark2);
+       border-right-color: var(--border-inlay-light2);
+       border-bottom-color: var(--border-inlay-light);
+   }
+
+   .evo_item {
+       margin: 12px 0;
+   }
+
+   .evo_depth_0 {
+       margin-left: 20px;
+   }
+
+   .evo_depth_1 {
+       margin-left: 50px;
+   }
+
+   .evo_depth_2 {
+       margin-left: 80px;
+   }
+
+   .evo_depth_3 {
+       margin-left: 110px;
+   }
+
+   .evo_depth_4 {
+       margin-left: 140px;
+   }
+
+   .evo_current {
+       color: #2fd3aa;
+       font-weight: bold;
+   }
+
+   progress.progess_bar {
+       width: 97%;
+       height: 10px;
+       appearance: none;
+   }
+
+   progress::-webkit-progress-bar {
+       background-color: #eee;
+       border-radius: 10px;
+       overflow: hidden;
+   }
+
+   progress.progress_low::-webkit-progress-value {
+       background-color: red;
+   }
+
+   progress.progress_medium::-webkit-progress-value {
+       background-color: orange;
+   }
+
+   progress.progress_high::-webkit-progress-value {
+       background-color: green;
+   }
+
+   /* Für Firefox */
+   progress.progress_low::-moz-progress-bar {
+       background-color: red;
+   }
+
+   progress.progress_medium::-moz-progress-bar {
+       background-color: orange;
+   }
+
+   progress.progress_high::-moz-progress-bar {
+       background-color: green;
+   }
+
+   .singlepdex_bottom_button {
+       width: 300px;
+       display: flex;
+       flex-wrap: wrap;
+       top: 700px;
+       align-content: flex-end;
+       justify-content: space-evenly;
+       align-items: baseline;
+       margin-top: 250px;
+       margin-bottom: 20px;
+   }
+
+   .singlepdex_button {
+       height: 30px;
+       width: 100px;
+       border-radius: 10px;
+       background-Color: var(--button-background);
+   }
+
+   .singlepdex_button:hover {
+       background-Color: var(--button-background-hover);
+       cursor: pointer;
+   }
+
+   .singlepdex_button_back {
+       height: 30px;
+       width: 30px;
+       border-radius: 10px;
+       background-Color: var(--button-background);
+   }
+
+   .singlepdex_button_back:hover {
+       background-Color: var(--button-background-hover);
+       cursor: pointer;
+   }
+
+   .singlepdex_button_forward {
+       height: 30px;
+       width: 30px;
+       border-radius: 10px;
+       background-Color: var(--button-background);
+   }
+
+   .singlepdex_button_forward:hover {
+       background-Color: var(--button-background-hover);
+       cursor: pointer;
+   }
+
+   .singlepdex_box {
+       height: 780px;
+       width: 300px;
+       border-Radius: 3px;
+       border: solid 5px varrgb(189 187 184);;
+       background-color: var(--singlePdex-background);
+       box-shadow: 2px 2px 6px 6px lightgray;
+   }
+
+   .single_card {
+       display: flex;
+       flex-direction: column;
+   }
+
+   .singlepdex_container {
+       position: relative;
+       width: 200px;
+       height: 200px;
+   }
+
+   .singlepdex_characteristics {
+       height: 20px;
+       width: 100%;
+       display: flex;
+       justify-content: center;
+       background-color: var(--Pdex-background);
+       margin-top: 10px;
+       margin-bottom: 10px;
+       gap: 5px;
+   }
+
+   .singlepdex_img {
+       height: 240px;
+       width: auto;
+       display: flex;
+       justify-content: center;
+       margin: 10px;
+       margin-bottom: 0px;
+       background-color: var(--singlePdex-background);
+   }
+
+   .singlepdex_image {
+       height: 200px;
+       width: 200px;
+       display: flex;
+       justify-content: center;
+       margin-top: 10px;
+       border: solid 40px;
+       border-radius: 10px;
+       border-right-color: var(--border-inlay-light2);
+       border-bottom-color: var(--border-inlay-light);
+       border-left-color: var(--border-inlay-dark2);
+       border-top-color: var(--border-inlay-dark);
+       box-shadow: 0px 0px 2px 2px lightgray;
+       color: black;
+       margin: 0 auto;
+       transition: all 2s easy-in-out;
+   }
+
+   .simplex_main {
+       padding-top: 10px;
+       margin-left: 2px;
+       margin-right: 1px;
+       display: flex;
+       justify-content: space-between;
+   }
+
+   .singlepdex_menue {
+       height: 20px;
+       width: 32%;
+       border: solid 2px white;
+       align-items: center;
+       justify-content: center;
+       background-color: var(--pdex-background);
+       color: white;
+   }
+
+   .singlepdex_menue_one:hover {
+       cursor: pointer;
+       background-color: var(--card-aktiv-hover);
+       border: dotted 2px white;
+       border-bottom: none;
+   }
+
+   .singlepdex_menue_two:hover {
+       cursor: pointer;
+       background-color: var(--card-aktiv-hover);
+       border: dotted 2px white;
+       border-bottom: none;
+   }
+
+   .singlepdex_menue_three:hover {
+       cursor: pointer;
+       background-color: var(--card-aktiv-hover);
+       border: dotted 2px white;
+       border-bottom: none;
+   }
+
+   .singlepdex_container_selcted {
+       background-color: var(--background-body);
+       border-bottom: solid 2px var(--background-body);
+   }
+
+   .singlepdex_main,
+   .singlepdex_static,
+   .singlepdex_evochain {
+       padding-left: 10px;
+       position: absolute;
+       top: 100;
+       left: 6;
+       width: 283px;
+       height: 230px;
+       border: solid 2px white;
+       background-color: var(--background-body);
+       border-top: none;
+       margin-left: 2px;
+   }
+
+   .singlepdex_progress_value {
+       display: flex;
+       width: 280px;
+       justify-content: space-between;
+   }
+
+   .singlepdex_topic {
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       align-items: center;
+       flex-wrap: nowrap;
+       margin: 5px;
+   }
+
+   .singlepdex_container_z_index {
+       background-color: var(--background-body);
+       z-index: 100;
+       border-left: solid 2px white;
+       border-right: solid 2px white;
+       border-bottom: solid 2px white;
+   }
+
+   @media (width <=380px) {
+       .innerOverlay {
+           width: 310px;
+       }
+   }

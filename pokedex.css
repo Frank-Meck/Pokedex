@@ -1,0 +1,211 @@
+/* =============== */
+/* === Basis CSS === */
+/* =============== */
+
+/* Allgemeines Layout für die Pokedex-Kategorie */
+.pdex_box {
+  background-color: var(--pdex-background);
+  border: solid 12px var(--border-inlay-dark);
+  border-bottom-color: var(--border-inlay-light);
+  border-left-color: var(--border-inlay-dark2);
+  border-radius: 10px;
+  border-right-color: var(--border-inlay-light2);
+  border-top-color: var(--border-inlay-dark);
+  box-shadow: 0px 0px 6px 6px lightgray;
+  height: 360px;
+  margin: 14px;
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  width: 300px;
+  z-index: 1;
+}
+
+.pdex_box:hover {
+  background-color: var(--pdex-trasitioncolor);
+  cursor: pointer;
+}
+
+/* Bild innerhalb der Pokedex-Box */
+.pdex_image {
+  border: solid 40px;
+  border-radius: 10px;
+  border-bottom-color: var(--border-inlay-light);
+  border-left-color: var(--border-inlay-dark2);
+  border-right-color: var(--border-inlay-light2);
+  border-top-color: var(--border-inlay-dark);
+  box-shadow: 0px 0px 2px 2px lightgray;
+  color: black;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom:2px;
+  margin-top: 10px;
+  transition: all 0.8s ease-in-out;
+  width: 200px;
+}
+
+.pdex_box:hover .pdex_image {
+  border: solid 20px;
+  height: 240px;
+  object-fit: contain;
+  transition: all 0.4s ease-in-out;
+  width: 240px;
+}
+
+.pdex_img {
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.pdex_image_tuer {
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  position: absolute;
+  transition: all 1s ease;
+  width: 100%;
+  z-index: 2;
+}
+
+.pdex_box:hover .pdex_image_tuer {
+  object-position: right;
+  scale:1.1;
+   width: 10%;
+}
+
+/* Pokedex-Titel */
+.pdex_topic {
+  align-items: center;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  justify-content: space-evenly;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  flex-wrap: nowrap;
+}
+
+/* Gesamtbereich der Pokedex-Daten */
+.pdex_total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+/* Kategorien für Pokedex */
+.pokedex_category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pokedex_btn_category {
+  border-color: white;
+  border-radius: 16px;
+  height: 24px;
+  width: 80px;
+}
+
+.pokedex_btn_bug {
+  background-color: var(--card-bug);
+}
+
+.pokedex_btn_dragon {
+  background-color: var(--card-dragon);
+}
+
+.pokedex_btn_dark {
+  background-color: var(--card-dark);
+  color: white;
+}
+
+.pokedex_btn_electric {
+  background-color: var(--card-electric);
+}
+
+.pokedex_btn_fairy {
+  background-color: var(--card-fairy);
+}
+
+.pokedex_btn_fighting {
+  background-color: var(--card-fighting);
+}
+
+.pokedex_btn_fire {
+  background-color: var(--card-fire);
+}
+
+.pokedex_btn_ghost {
+  background-color: var(--card-ghost);
+}
+
+.pokedex_btn_grass {
+  background-color: var(--card-grass);
+}
+
+.pokedex_btn_ground {
+  background-color: var(--card-ground);
+}
+
+.pokedex_btn_ice {
+  background-color: var(--card-ice);
+}
+
+.pokedex_btn_normal {
+  background-color: var(--card-normal);
+}
+
+.pokedex_btn_poison {
+  background-color: var(--card-poison);
+}
+
+.pokedex_btn_psychic {
+  background-color: var(--card-psychic);
+}
+
+.pokedex_btn_rock {
+  background-color: var(--card-rock);
+  color: lightgray;
+}
+
+.pokedex_btn_steel {
+  background-color: var(--card-steel);
+  color: white;
+}
+
+.pokedex_btn_water {
+  background-color: var(--card-water);
+}
+
+.pokedex_btn_flying {
+  background-color: var(--card-flying);
+}
+
+/* =============== */
+/* === Media Queries === */
+/* =============== */
+
+/* → <= 380px */
+@media (max-width: 380px) {
+  .pdex_box {
+    margin: 10px auto 20px auto;
+  }
+
+  .pdex_img {
+    height: auto;
+    width: 100%;
+  }
+
+  .pokedex_category {
+    gap: 5px;
+    width: 100%;
+  }
+}

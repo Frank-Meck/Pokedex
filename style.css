@@ -1,0 +1,63 @@
+/* ------------------------------ Body Styles ------------------------------ */
+body {
+    background-color: var(--background-body);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ------------------------------ Spinner Styles ------------------------------ */
+/* Container für den Spinner */
+#spinner {
+    background-color: rgba(255, 255, 255, 0.5); /* optional halbtransparentes Overlay */
+    display: none; /* per JS sichtbar machen */
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 40;
+}
+
+/* Dein runder Loader */
+.loader {
+    animation: spin 1s linear infinite;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #007bff;
+    height: 60px;
+    width: 60px;
+}
+
+/* Ladebalken mit Bewegung */
+.spinner-bar {
+    background: #ddd;
+    border-radius: 5px;
+    height: 10px;
+    margin: 20px auto;
+    overflow: hidden;
+    width: 120px;
+}
+
+.spinner-bar div {
+    animation: loadingBar 1s linear infinite;
+    background: #007bff;
+    height: 100%;
+    width: 30%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes loadingBar {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
