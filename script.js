@@ -6,19 +6,26 @@ let selectedContainer = 3;
 function init() {
   const genSelect = document.getElementById("gen_select");
   genSelect.value = "1"; 
-  ladeGeneration(genSelect.value);
+  loadGeneration(genSelect.value);
 }
 
 
 function searchPokemon() {
   let searchString = document.getElementById("idsearchString").value;
+  let hintRef = document.getElementById("searchHint");
+
+  if (searchString.length > 0 && searchString.length < 3) {
+    hintRef.innerText = " ➜ min. 3 Zeichen eingeben!";
+  } else {
+    hintRef.innerText = "";
+  }
+
   if (searchString.length >= 3) {
     renderSearchResult(searchString);
   } else {
     renderPokedex();
   }
 }
-
 
 function changeContainer(value) {
   removeClassList();

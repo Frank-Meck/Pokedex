@@ -47,9 +47,8 @@ function renderSearchResult(searchString) {
       found++;
     }
   }
-  if (found === 0) {
+  if (found === 0) { // Anzeige keine Treffer-Zähler = 0
     contentPokedexRef.innerHTML = getSearchError(searchString);
-        
   }
 }
 
