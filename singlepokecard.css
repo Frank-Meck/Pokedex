@@ -28,14 +28,16 @@
    }
 
    .inner_overlay {
+       height: 660px;
+       width: 310px;
+   
        display: flex;
        flex-direction: column;
        justify-Content: flex-start;
        align-items: center;
+
        border-Radius: 20px;
        background-color: var(--singlePdex-background);
-       height: 660px;
-       width: 310px;
        border: solid 20px black;
        border-left-color: var(--border-inlay-dark);
        border-top-color: var(--border-inlay-dark2);
