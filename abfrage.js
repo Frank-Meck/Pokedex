@@ -16,24 +16,28 @@ let letzteErfolgreicheGeneration = 1;
 
 
 async function loadGeneration(genNum) {
-  document.getElementById('idsearchString').value = ''; //Lösche die Eingabe im Input-Feld suchen
+  document.getElementById('idsearchString').value = ''; 
   const spinner = document.getElementById("spinner");
-  backToPokedex(); 
-  showSpinner(true, spinner); 
+  backToPokedex();
+  showSpinner(true, spinner);
 
-  const gen = getGeneration(genNum); 
-  if (!gen) return; 
+  const gen = getGeneration(genNum);
+  if (!gen) return;
 
   try {
-    const ersteIDs = generateIDs(gen.start, Math.min(gen.start + 9, gen.ende));
-    await loadPokemonData(ersteIDs);
+   
+    const ersteIDs = generateIDs(gen.start, Math.min(gen.start + 9, gen.ende)); 
+    await loadPokemonData(ersteIDs); 
+
     if (gen.ende > gen.start + 9) {
-      loadRemainingPokemonParallel(gen.start + 10, gen.ende, 50);
+
+      loadRemainingPokemonParallel(gen.start + 10, gen.ende);
     }
   } catch (error) {
-    handleError(error, spinner); 
+    handleError(error, spinner);
   }
 }
+
 
 
 function showSpinner(visible, spinner) {
@@ -52,11 +56,11 @@ function getGeneration(genNum) {
 }
 
 
-async function loadPokemonData(ersteIDs) {
-  const ersteDaten = await Promise.allSettled(ersteIDs.map(id => loadPokemonWithGermanName(id)));
-  allePokemonDaten = ersteDaten.map((result, i) => {
+async function loadPokemonData(ids) {
+  const pokemonDaten = await Promise.allSettled(ids.map(id => loadPokemonWithGermanName(id)));
+  allePokemonDaten = pokemonDaten.map((result, i) => {
     if (result.status === "fulfilled") return result.value;
-    return createErrorPokemon(ersteIDs[i], result.reason);
+    return createErrorPokemon(ids[i], result.reason);
   });
 
   bereitsAngezeigt = 0;
@@ -73,6 +77,7 @@ function handleError(error, spinner) {
 
 function generateIDs(start, ende) {
   const ids = [];
+  console.log(start, ende);
   for (let i = start; i <= ende; i++) {
     ids.push(i);
   }
@@ -84,11 +89,8 @@ async function loadRemainingPokemonParallel(startID, endID) {
   const ladebalken = document.getElementById("loading_bar_container");
   ladebalken.style.display = "block";
 
-  const ids = [];
-  for (let i = startID; i <= endID; i++) {
-    ids.push(i);
-  }
-
+  const ids = generateIDs(startID, endID);
+  
   const blockErgebnisse = await Promise.allSettled(
     ids.map(id => loadPokemonWithGermanName(id))
   );
@@ -103,6 +105,7 @@ async function loadRemainingPokemonParallel(startID, endID) {
 
   ladebalken.style.display = "none";
 }
+
 
 
 async function loadAndProcessBlock(ids, ladebalken, callback) {
@@ -140,6 +143,7 @@ function createErrorPokemon(id, fehler) {
     evolutionKette: []
   };
 }
+
 
 
 function updatePokedexWithBlock(blockDaten) {

@@ -1,6 +1,7 @@
 
 let select = 1;
 let selectedContainer = 3; 
+let lastSearchLength = 0; // Variable, um die letzte Länge zu speichern
 
 
 function init() {
@@ -20,11 +21,18 @@ function searchPokemon() {
     hintRef.innerText = "";
   }
 
+  // Wenn die Länge des searchStrings mindestens 3 ist, rufe die Suchergebnisse auf
   if (searchString.length >= 3) {
     renderSearchResult(searchString);
   } else {
-    renderPokedex();
+    // Überprüfen, ob die Länge des searchString von 3 auf weniger als 3 geändert hat
+    if (lastSearchLength >= 3 && searchString.length < 3) {
+      renderPokedex(); // Nur aufrufen, wenn die Länge sich geändert hat
+    }
   }
+
+  // Speichern der aktuellen Länge für die nächste Suche
+  lastSearchLength = searchString.length;
 }
 
 function changeContainer(value) {
