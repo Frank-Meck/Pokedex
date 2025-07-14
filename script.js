@@ -13,9 +13,8 @@ function init() {
 function searchPokemon() {
   let searchString = document.getElementById("idsearchString").value;
   if (searchString.length >= 3) {
-    renderSearchResult(searchString)
-  }
-  if (searchString.length < 3) {
+    renderSearchResult(searchString);
+  } else {
     renderPokedex();
   }
 }

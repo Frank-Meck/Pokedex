@@ -29,10 +29,12 @@ function renderPokedexCategory(index) {
 }
 
 
+
 function renderSearchResult(searchString) {
   let contentPokedexRef = document.getElementById(`id_pdex_total`);
   contentPokedexRef.innerHTML = "";
   let stringLength = searchString.length;
+  let found = 0; // Treffer-Zähler
 
   for (let index = 0; index < allePokemonDaten.length; index++) {
     const p = allePokemonDaten[index];
@@ -42,10 +44,14 @@ function renderSearchResult(searchString) {
     if (searchString.toLowerCase() === checkString.toLowerCase()) {
       contentPokedexRef.innerHTML += getPokedex(index);
       renderPokedexCategory(index);
+      found++;
     }
   }
+  if (found === 0) {
+    contentPokedexRef.innerHTML = getSearchError(searchString);
+        
+  }
 }
-
 
 function renderSingleCard(index) {
   const p = allePokemonDaten[index];
@@ -80,7 +86,5 @@ const evoDeutsch = p.evolutionKette.map(name => {
   );
   return match?.deutscherName || name;
 });
-
-
 }
 

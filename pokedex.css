@@ -2,6 +2,18 @@
 /* === Basis CSS === */
 /* =============== */
 
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align:center;
+}
+
+.highlight {
+  color: rgb(157, 255, 0);           /* Oder jede andere Farbe */
+  font-weight: bold;
+}
+
 /* Allgemeines Layout für die Pokedex-Kategorie */
 .pdex_box {
   background-color: var(--pdex-background);

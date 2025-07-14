@@ -221,3 +221,13 @@ function  getSingleCardFailure(index) {
     </div>
   `;
 }
+
+function getSearchError(searchString) {
+  return `
+    <div class="error">
+      In dieser Generation konnte ich kein Pokémon mit <br><br>
+      >> <span class="highlight">${searchString}</span> << <br><br>
+      finden.<br><br>
+      Bitte ändere die Suchanfrage oder lösche diese!
+    </div>`;
+}
