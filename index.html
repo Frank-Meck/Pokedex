@@ -29,13 +29,11 @@
         <div class="header_middle">
           <label for="idsearchString" class="sr-only"></label>
           <p class="header_p">
-            suchen: <span id="searchHint" class="search-hint"></span>
+            suchen: <span id="searchHint" class="search-hint"></span>  <!-- Hinweis min. 3 Zeichen  --> 
           </p>
           <input onkeyup="searchPokemon()" id="idsearchString" class="header_input" type="text"
             placeholder="min 3 Chars" value="" />
-          <div class="error" id="id_error">
-
-
+          <div class="error" id="id_error">        <!-- Fehlermeldung, wenn nichts mit dem Zeichensatz gefunden  -->
           </div>
         </div>
         <div class="header_right">

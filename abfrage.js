@@ -180,8 +180,8 @@ async function loadPokemonWithGermanName(id) {
 
 async function loadPokemonAndSpecies(id) {
   const [pokemon, species] = await Promise.all([
-    fetch(`http://pokeapi.co/api/v2/pokemon/${id}`).then(r => r.json()),
-    fetch(`http://pokeapi.co/api/v2/pokemon-species/${id}`).then(r => r.json())
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(r => r.json()),
+    fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then(r => r.json())
   ]);
   return [pokemon, species];
 }
