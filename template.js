@@ -1,13 +1,13 @@
 
 function getPokedex(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   return `
 <div class="pdex_box" onclick="startShowSingleCard(${index})">
         <div class="pdex_gaming">
         </div>
         <div class="pdex_topic">
             <div>id : ${p.id}</div>
-            <div>${p.deutscherName}</div>
+            <div>${p.germanName}</div>
             <div></div>
         </div>
         <div class="pdex_img">
@@ -23,14 +23,14 @@ function getPokedex(index) {
 
 
 function getPokedexFailure(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   return `
 <div class="pdex_box" onclick="startShowSingleCard(${index})">
         <div class="pdex_gaming">
         </div>
         <div class="pdex_topic">
             <div>id : ${p.id}</div>
-            <div>${p.deutscherName}</div>
+            <div>${p.germanName}</div>
             <div></div>
         </div>
         <div class="pdex_img">
@@ -46,13 +46,13 @@ function getPokedexFailure(index) {
 
 
 function getPokedexCategory(index, indexTyps) {
-  const typeName = allePokemonDaten[index].types[indexTyps].type.name;
+  const typeName = allPokemonData[index].types[indexTyps].type.name;
   return `<button class="pokedex_btn_${typeName} pokedex_btn_category">${typeName}</button>`;
 }
 
 
 function getSingleCard(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   return `
   <div class="inner_overlay">
         <div class="singlepdex_box">
@@ -61,7 +61,7 @@ function getSingleCard(index) {
                     <p>id ${p.id}</p>
                 </div>
                 <div>
-                    <p>${p.deutscherName}</p>
+                    <p>${p.germanName}</p>
                 </div>
             </div>
             <div class="singlepdex_img">
@@ -114,8 +114,8 @@ function getSingleCard(index) {
             <div id="idsinglepdex_evochain" class="singlepdex_evochain">
                 <br>
                 <p>Evolution:</p><br>
-                ${p.evolutionKette.map((name, index) => {
-                const istAktuell = name === p.deutscherName;
+                ${p.evolutionChain.map((name, index) => {
+                const istAktuell = name === p.germanName;
                 return `
                 <p class="evo_item evo-depth-${index} ${istAktuell ? " evo_current" : "" }">
                     ${index > 0 ? "→ " : ""}${name}
@@ -138,7 +138,7 @@ function getSingleCard(index) {
 
 
 function  getSingleCardFailure(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   return `
       <div class="inner_overlay">
         <div class="singlepdex_box">
@@ -147,7 +147,7 @@ function  getSingleCardFailure(index) {
                     <p>id ${p.id}</p>
                 </div>
                 <div>
-                    <p>${p.deutscherName}</p>
+                    <p>${p.germanName}</p>
                 </div>
             </div>
             <div class="singlepdex_img">
@@ -202,7 +202,7 @@ function  getSingleCardFailure(index) {
                 <br>
                 <p>Evolution:</p><br>
                 ${p.evolutionKette.map((name, index) => {
-                const istAktuell = name === p.deutscherName;
+                const istAktuell = name === p.germanName;
                 return `
                 <p class="evo_item evo-depth-${index} ${istAktuell ? " evo_current" : "" }">
                     ${index > 0 ? "→ " : ""}${name}

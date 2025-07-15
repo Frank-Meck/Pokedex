@@ -31,7 +31,7 @@ body.no-scroll {
     width: 60px;
 }
 
-/* Ladebalken mit Bewegung */
+/* loadingBar mit Bewegung */
 .spinner-bar {
     background: #ddd;
     border-radius: 5px;

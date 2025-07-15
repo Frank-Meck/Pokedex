@@ -10,9 +10,9 @@ const generationen = {
 };
 
 
-let allePokemonDaten = [];
-let bereitsAngezeigt = 0;
-let letzteErfolgreicheGeneration = 1;
+let allPokemonData = [];
+let alreadyDisplayed = 0;
+let lastSuccessfulGeneration = 1;
 
 
 async function loadGeneration(genNum) {
@@ -57,13 +57,13 @@ function getGeneration(genNum) {
 
 
 async function loadPokemonData(ids) {
-  const pokemonDaten = await Promise.allSettled(ids.map(id => loadPokemonWithGermanName(id)));
-  allePokemonDaten = pokemonDaten.map((result, i) => {
+  const pokemonData = await Promise.allSettled(ids.map(id => loadPokemonWithGermanName(id)));
+  allPokemonData = pokemonData.map((result, i) => {
     if (result.status === "fulfilled") return result.value;
     return createErrorPokemon(ids[i], result.reason);
   });
 
-  bereitsAngezeigt = 0;
+  alreadyDisplayed = 0;
   renderPokedex(); 
   showSpinner(false, document.getElementById("spinner"));
 }
@@ -77,7 +77,6 @@ function handleError(error, spinner) {
 
 function generateIDs(start, ende) {
   const ids = [];
-  console.log(start, ende);
   for (let i = start; i <= ende; i++) {
     ids.push(i);
   }
@@ -86,36 +85,36 @@ function generateIDs(start, ende) {
 
 
 async function loadRemainingPokemonParallel(startID, endID) {
-  const ladebalken = document.getElementById("loading_bar_container");
-  ladebalken.style.display = "block";
+  const loadingBar = document.getElementById("loading_bar_container");
+  loadingBar.style.display = "block";
 
   const ids = generateIDs(startID, endID);
   
-  const blockErgebnisse = await Promise.allSettled(
+  const blockResults = await Promise.allSettled(
     ids.map(id => loadPokemonWithGermanName(id))
   );
 
-  const blockDaten = blockErgebnisse.map((result, i) => {
+  const blockData = blockResults.map((result, i) => {
     if (result.status === "fulfilled") return result.value;
     return createErrorPokemon(ids[i], result.reason);
   });
 
-  allePokemonDaten = allePokemonDaten.concat(blockDaten);
+  allPokemonData = allPokemonData.concat(blockData);
   renderPokedex();
 
-  ladebalken.style.display = "none";
+  loadingBar.style.display = "none";
 }
 
 
 
-async function loadAndProcessBlock(ids, ladebalken, callback) {
+async function loadAndProcessBlock(ids, loadingBar, callback) {
   try {
-    const blockDaten = await Promise.all(ids.map(id => loadPokemonWithGermanName(id)));
-    updatePokedexWithBlock(blockDaten);
+    const blockData = await Promise.all(ids.map(id => loadPokemonWithGermanName(id)));
+    updatePokedexWithBlock(blockData);
     callback();
   } catch (error) {
     console.error("Fehler beim Blockladen:", error);
-    ladebalken.style.display = "none";
+    loadingBar.style.display = "none";
   }
 }
 
@@ -124,7 +123,7 @@ function createErrorPokemon(id, fehler) {
   return {
     id,
     name: "Fehler",
-    deutscherName: "Unbekannt",
+    germanName: "Unbekannt",
     sprites: {
       front_default: "./assets/img/placeholder_error.png", 
     },
@@ -140,15 +139,15 @@ function createErrorPokemon(id, fehler) {
     defense: 0,
     speed: 0,
     maxStats: { hp: 1, attack: 1, defense: 1, speed: 1 },
-    evolutionKette: []
+   evolutionChain: []
   };
 }
 
 
 
-function updatePokedexWithBlock(blockDaten) {
-  allePokemonDaten = allePokemonDaten.concat(blockDaten);
-  renderPokedex(blockDaten.length);
+function updatePokedexWithBlock(blockData) {
+  allPokemonData = allPokemonData.concat(blockData);
+  renderPokedex(blockData.length);
 }
 
 function calculateIDBlock(start, end, groesse) {
@@ -162,18 +161,18 @@ function calculateIDBlock(start, end, groesse) {
 
 async function loadPokemonWithGermanName(id) {
   try {
-    const [pokemonDaten, speciesDaten] = await loadPokemonAndSpecies(id);
-    const deutscherName = findGermanNames(speciesDaten, pokemonDaten);
-    const werte = extractValues(pokemonDaten);
-    const maxWerte = calculationMaxValue(pokemonDaten);
-    const evolutionKette = await loadEvolution(speciesDaten, id);
+    const [pokemonData, speciesDaten] = await loadPokemonAndSpecies(id);
+    const germanName = findGermanNames(speciesDaten, pokemonData);
+    const values = extractValues(pokemonData);
+    const maxvalues = calculationMaxValue(pokemonData);
+    const evolutionChain = await loadEvolution(speciesDaten, id);
 
     return {
-      ...pokemonDaten,
-      deutscherName,
-      ...werte,
-      maxStats: maxWerte,
-      evolutionKette
+      ...pokemonData,
+      germanName,
+      ...values,
+      maxStats: maxvalues,
+     evolutionChain
     };
   } catch (error) {
     console.error(`Fehler beim Laden von Pokémon ID ${id}:`, error);
@@ -191,28 +190,28 @@ async function loadPokemonAndSpecies(id) {
 }
 
 
-function findGermanNames(species, fallbackDaten) {
-  const eintrag = species.names.find(n => n.language.name === "de");
-  return eintrag ? eintrag.name : fallbackDaten.name;
+function findGermanNames(species, fallbackData) {
+  const entry = species.names.find(n => n.language.name === "de");
+  return entry ? entry.name : fallbackData.name;
 }
 
 
-function extractValues(pokemonDaten) {
-  const werte = {};
-  pokemonDaten.stats.forEach(s => {
+function extractValues(pokemonData) {
+  const values = {};
+  pokemonData.stats.forEach(s => {
     if (["hp", "attack", "defense", "speed"].includes(s.stat.name)) {
-      werte[s.stat.name] = s.base_stat;
+      values[s.stat.name] = s.base_stat;
     }
   });
-  return werte;
+  return values;
 }
 
 
 async function loadEvolution(speciesDaten, id) {
   try {
     const evoUrl = speciesDaten.evolution_chain.url;
-    const evoDaten = await fetch(evoUrl).then(r => r.json());
-    return await extractEvolutionChainWithGerman(evoDaten.chain);
+    const evoData = await fetch(evoUrl).then(r => r.json());
+    return await extractEvolutionChainWithGerman(evoData.chain);
   } catch (e) {
     console.warn(`Keine Evolution für Pokémon-ID ${id}:`, e.message);
     return [];
@@ -222,67 +221,67 @@ async function loadEvolution(speciesDaten, id) {
 
 async function extractEvolutionChainWithGerman(chain) {
   const namen = [];
-  let aktuelles = chain;
-  while (aktuelles) {
-    const name = await getGermanNames(aktuelles);
+  let current = chain;
+  while (current) {
+    const name = await getGermanNames(current);
     namen.push(name);
-    aktuelles = aktuelles.evolves_to[0] || null;
+    current = current.evolves_to[0] || null;
   }
   return namen;
 }
 
 
-async function getGermanNames(knoten) {
+async function getGermanNames(node) {
   try {
-    const res = await fetch(knoten.species.url);
+    const res = await fetch(node.species.url);
     const data = await res.json();
-    const eintrag = data.names.find(n => n.language.name === "de");
-    return eintrag ? eintrag.name : knoten.species.name;
+    const entry = data.names.find(n => n.language.name === "de");
+    return entry ? entry.name : node.species.name;
   } catch (e) {
     console.warn("Fehler beim Laden deutscher Namen:", e.message);
-    return knoten.species.name;
+    return node.species.name;
   }
 }
 
 function calculationMaxValue(pokemon) {
-  const maxWerte = {};
+  const maxvalues = {};
   pokemon.stats.forEach(statObj => {
     const base = statObj.base_stat;
     const name = statObj.stat.name;
     if (name === "hp") {
-      maxWerte.hp = 2 * base + 204;
+      maxvalues.hp = 2 * base + 204;
     } else if (["attack", "defense", "speed"].includes(name)) {
-      maxWerte[name] = Math.floor((2 * base + 104) * 1.1);
+      maxvalues[name] = Math.floor((2 * base + 104) * 1.1);
     }
   });
-  return maxWerte;
+  return maxvalues;
 }
 
 
 function getStatColorClass(wert, max) {
-  const prozent = (wert / max) * 100;
-  if (prozent >= 70) return "progress_high";
-  if (prozent >= 40) return "progress_medium";
+  const percent = (wert / max) * 100;
+  if (percent >= 70) return "progress_high";
+  if (percent >= 40) return "progress_medium";
   return "progress_low";
 }
 
 
-function showNextPokemon(anzahl) {
-  const container = document.getElementById("pokemonDaten");
-  for (let i = bereitsAngezeigt; i < bereitsAngezeigt + anzahl && i < allePokemonDaten.length; i++) {
-    const data = allePokemonDaten[i];
-  renderPokedex(anzahl);
+function showNextPokemon(number) {
+  const container = document.getElementById("pokemonData");
+  for (let i = alreadyDisplayed; i < alreadyDisplayed + number && i < allPokemonData.length; i++) {
+    const data = allPokemonData[i];
+  renderPokedex(number);
      }
-  bereitsAngezeigt += anzahl;
+  alreadyDisplayed += number;
 }
 
 
 function showErrorMessage(error) {
   console.error("Fehler beim Laden:", error);
 
-  const fehlerDiv = document.getElementById("fehlerAnzeige");
-  if (fehlerDiv) {
-    fehlerDiv.textContent = "Fehler beim Laden: " + error.message;
-    fehlerDiv.style.display = "block";
+  const errorDiv = document.getElementById("fehlerAnzeige");
+  if (errorDiv) {
+    errorDiv.textContent = "Fehler beim Laden: " + error.message;
+    errorDiv.style.display = "block";
   }
 }

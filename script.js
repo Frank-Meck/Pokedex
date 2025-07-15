@@ -64,7 +64,7 @@ function removeClassList() {
 
 
 function previousPokedex(currentId) {
-  const currentIndex = allePokemonDaten.findIndex(p => p.id === currentId);
+  const currentIndex = allPokemonData.findIndex(p => p.id === currentId);
   const previousIndex = currentIndex - 1;
   if (previousIndex >= 0) {
     renderSingleCard(previousIndex);
@@ -78,14 +78,14 @@ function previousPokedex(currentId) {
 
 
 function nextPokedex(currentId) {
-  const currentIndex = allePokemonDaten.findIndex(p => p.id === currentId);
+  const currentIndex = allPokemonData.findIndex(p => p.id === currentId);
   const nextIndex = currentIndex + 1;
-  if (nextIndex < allePokemonDaten.length) {
+  if (nextIndex < allPokemonData.length) {
     renderSingleCard(nextIndex);
     changeContainer(selectedContainer); 
     document.getElementById("id_btn_previous").classList.remove("d_none");
   }
-  if (nextIndex >= allePokemonDaten.length - 1) {
+  if (nextIndex >= allPokemonData.length - 1) {
     document.getElementById("id_btn_next").classList.add("d_none");
   }
 }
@@ -104,7 +104,7 @@ function startShowSingleCard(indexSingle) {
   if (indexSingle == 0) {
     document.getElementById("id_btn_previous").classList.add("d_none");
   }
-  if (indexSingle >= allePokemonDaten.length - 1) {
+  if (indexSingle >= allPokemonData.length - 1) {
     document.getElementById("id_btn_next").classList.add("d_none");
   }
 }

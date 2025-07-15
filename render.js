@@ -2,8 +2,8 @@
 function renderPokedex() {
   let contentPokedexRef = document.getElementById(`id_pdex_total`);
   contentPokedexRef.innerHTML = "";
-for (let index = 0; index < allePokemonDaten.length; index++) {
-  const p = allePokemonDaten[index];
+for (let index = 0; index < allPokemonData.length; index++) {
+  const p = allPokemonData[index];
   
   if (p.error) {
     contentPokedexRef.innerHTML += getPokedexFailure(index);
@@ -17,7 +17,7 @@ renderPokedexCategory(index) ;
 
 
 function renderPokedexCategory(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   if (p.error) return;
 
   let contentPokedexCategory = document.getElementById(`id_pokedex_category${index}`);
@@ -36,11 +36,11 @@ function renderSearchResult(searchString) {
   let stringLength = searchString.length;
   let found = 0; // Treffer-Zähler
 
-  for (let index = 0; index < allePokemonDaten.length; index++) {
-    const p = allePokemonDaten[index];
+  for (let index = 0; index < allPokemonData.length; index++) {
+    const p = allPokemonData[index];
     if (p.error) continue;
 
-    let checkString = p.deutscherName.slice(0, stringLength);
+    let checkString = p.germanName.slice(0, stringLength);
     if (searchString.toLowerCase() === checkString.toLowerCase()) {
       contentPokedexRef.innerHTML += getPokedex(index);
       renderPokedexCategory(index);
@@ -53,7 +53,7 @@ function renderSearchResult(searchString) {
 }
 
 function renderSingleCard(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   const contentPokedexRef = document.getElementById(`idclassOverlay`);
   contentPokedexRef.innerHTML = "";
 
@@ -66,7 +66,7 @@ function renderSingleCard(index) {
 
 
 function renderSinglePdexCategory(index) {
-  const p = allePokemonDaten[index];
+  const p = allPokemonData[index];
   if (p.error) return;
 
   let contentPokedexCategory = document.getElementById(`id_singlepdex_characteristics_${index}`);
@@ -80,10 +80,10 @@ function renderSinglePdexCategory(index) {
 
 function evoChain(){
 const evoDeutsch = p.evolutionKette.map(name => {
-  const match = allePokemonDaten.find(x =>
-    x.name === name || x.deutscherName?.toLowerCase() === name
+  const match = allPokemonData.find(x =>
+    x.name === name || x.germanName?.toLowerCase() === name
   );
-  return match?.deutscherName || name;
+  return match?.germanName || name;
 });
 }
 
