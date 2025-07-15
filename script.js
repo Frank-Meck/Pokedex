@@ -92,7 +92,7 @@ function nextPokedex(currentId) {
 
 
 function startShowSingleCard(indexSingle) {
-  document.body.classList.add("no-scroll");
+  document.body.classList.add("no_scroll");
   const overlay = document.getElementById("idclassOverlay");
   overlay.style.display = "flex"; 
   renderSingleCard(indexSingle);
@@ -113,6 +113,6 @@ function startShowSingleCard(indexSingle) {
 function backToPokedex() {
   document.getElementById("idclassOverlay").style.display = "none";
   document.getElementById("idclassOverlay").innerHTML = "";
-  document.body.classList.remove("no-scroll");
+  document.body.classList.remove("no_scroll");
 }
 

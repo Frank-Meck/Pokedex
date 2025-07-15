@@ -79,7 +79,7 @@ function renderSinglePdexCategory(index) {
 
 
 function evoChain(){
-const evoDeutsch = p.evolutionKette.map(name => {
+const evoDeutsch = p.evolutionChain.map(name => {
   const match = allPokemonData.find(x =>
     x.name === name || x.germanName?.toLowerCase() === name
   );
